@@ -18,10 +18,13 @@ services:
       - redis_data:/data
 
   web:
+    container_name: web
     build: .
     stdin_open: true
     tty: true
+    command: ./bin/rails server -b 0.0.0.0 -p 3000
     environment:
+      RAILS_ENV: development
       DATABASE_URL: postgresql://postgres:password@db:5432/myapp_development
       REDIS_URL: redis://redis:6379/1
     ports:
@@ -34,15 +37,17 @@ services:
 
   test:
     build: .
-    command: bundle exec rspec
+    command: bash -c "bin/rails db:test:prepare && bundle exec rspec"
     volumes:
       - .:/rails
     depends_on:
       - db
       - redis
     environment:
+      RAILS_ENV: test
       DATABASE_URL: postgresql://postgres:password@db:5432/myapp_test
       REDIS_URL: redis://redis:6379/0
+
 volumes:
     postgres13:
     redis_data:
