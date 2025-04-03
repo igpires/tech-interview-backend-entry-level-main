@@ -1,5 +1,45 @@
 # Desafio técnico e-commerce
 
+## Executando a aplicação com Docker 🐳
+
+Este projeto foi **dockerizado** para facilitar a configuração e execução da aplicação e seus serviços (PostgreSQL, Redis e Sidekiq Worker).
+
+### Pré-requisitos
+
+- Docker
+- Docker Compose
+
+### Subindo a aplicação
+
+```bash
+docker compose up -d --build
+```
+Esse comando irá:
+- Construir as imagens da aplicação
+- Subir os containers do PostgreSQL, Redis, Web e Sidekiq Worker
+
+### Rodando os testes
+
+```bash
+docker compose run --rm test
+```
+
+### Acessando o console do Rails
+
+```bash
+docker compose exec web bin/rails c
+```
+
+### Executando as seeds
+
+```bash
+docker compose exec web bin/rails db:seed
+```
+
+
+# Especificações do projeto
+
+
 ## Nossas expectativas
 
 A equipe de engenharia da RD Station tem alguns princípios nos quais baseamos nosso trabalho diário. Um deles é: projete seu código para ser mais fácil de entender, não mais fácil de escrever.
