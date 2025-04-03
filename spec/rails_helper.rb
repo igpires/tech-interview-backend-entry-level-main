@@ -35,6 +35,9 @@ RSpec.configure do |config|
     Rails.root.join('spec/fixtures')
   ]
 
+
+  # This allows you to use FactoryBot methods without the FactoryBot prefix
+  # e.g. create(:user) instead of FactoryBot.create(:user)
   config.include FactoryBot::Syntax::Methods
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
